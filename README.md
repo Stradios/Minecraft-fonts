@@ -1,4 +1,4 @@
-# Segoe-UI Font on Linux (Ubuntu)
+# Minecraft Font on Linux (Ubuntu)
 
 
 
