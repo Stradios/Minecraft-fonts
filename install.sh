@@ -19,13 +19,13 @@ WHITE='\033[01;37m'
 
 # Destination directory
 #ROOT_UID=0
-DEST_DIR="/usr/share/fonts/MinecraftTen-VGORe/TrueType/Minecraft/"
+DEST_DIR="/usr/share/fonts/Minecraft/TrueType/MinecraftUI/"
 WINE_FONT_DIR="$HOME/.wine/drive_c/windows/Fonts/"
 
 #if [ "$UID" -eq "$ROOT_UID" ]; then
-#  DEST_DIR="/usr/local/share/fonts/MinecraftTen-VGORe/TrueType/Minecraft/
+#  DEST_DIR="/usr/local/share/fonts/Minecraft/TrueType/MinecraftUI/
 #else
-#  DEST_DIR="$HOME/.local/share/fonts/MinecraftTen-VGORe/TrueType/Minecraft/"
+#  DEST_DIR="$HOME/.local/share/fonts/Minecraft/TrueType/MinecraftUI/"
 #fi
 
 # Check Internet Conection
@@ -57,20 +57,20 @@ function cekwget(){
 }
 
 function cekfont(){
-    echo -e "$BLUE [ * ] Checking for Minecraft Font"
+    echo -e "$BLUE [ * ] Checking for Minecraft-UI Font"
     sleep 1
-    fc-list | grep -i "Minecraft" >/dev/null 2>&1
+    fc-list | grep -i "Minecraft-UI" >/dev/null 2>&1
     if [ "$?" -eq "0" ]; then
-    echo -e "$GREEN [ ✔ ]$BLUE Minecraft Font ➜$GREEN INSTALLED\n"
+    echo -e "$GREEN [ ✔ ]$BLUE Minecraft-UI Font ➜$GREEN INSTALLED\n"
         sleep 1
     else
-        echo -e "$RED [ X ]$BLUE Minecraft Font ➜$RED NOT INSTALLED\n"
+        echo -e "$RED [ X ]$BLUE Minecraft-UI Font ➜$RED NOT INSTALLED\n"
         continueFont
     fi
 }
 
 function continueFont(){
-    echo -e "$LGREEN Do you want to install Minecraft Font? (y)es, (n)o :"
+    echo -e "$LGREEN Do you want to install Minecraft-UI Font? (y)es, (n)o :"
     read  -p ' ' INPUT
     case $INPUT in
     [Yy]* ) fontinstall;;
@@ -83,17 +83,19 @@ function fontinstall(){
     sudo mkdir -p "$DEST_DIR"
     if [ -d font ]; then
         cp font/MinecraftTen.ttf "$DEST_DIR"/MinecraftTen.ttf > /dev/null 2>&1 # MinecraftTen        
-        cp font/MinecraftEvenings.ttf "$DEST_DIR"/MinecraftEvenings.ttf > /dev/null 2>&1 # MinecraftEvenings
-        if [ -d $WINE_FONT_DIR ]; then
+        cp font/MinecraftTenE.ttf "$DEST_DIR"/MinecraftTenE.ttf > /dev/null 2>&1 # MinecraftTenE
+        
+        if [ -d $WINE_FONT_DIR ]; then        
             cp font/MinecraftTen.ttf "$WINE_FONT_DIR"/MinecraftTen.ttf > /dev/null 2>&1 # MinecraftTen
-            cp font/MinecraftEvenings.ttf "$WINE_FONT_DIR"/MinecraftEvenings.ttf > /dev/null 2>&1 # MinecraftEvenings
+            cp font/MinecraftTenE.ttf "$WINE_FONT_DIR"/MinecraftTenE.ttf > /dev/null 2>&1 # MinecraftTenE
+        
             echo -e "$GREEN\n Font installed to WINE $LBLUE'$WINE_FONT_DIR'"
         fi
 
     else
         # Download font from github static link code
-        wget -q https://github.com/mrbvrz/segoe-ui/raw/master/font/segoeui.ttf?raw=true -O "$DEST_DIR"/segoeui.ttf > /dev/null 2>&1 # regular
-        wget -q https://github.com/mrbvrz/segoe-ui/raw/master/font/segoeui.ttf?raw=true -O "$DEST_DIR"/segoeui.ttf > /dev/null 2>&1 # regular
+        wget -q https://github.com/Stradios/Minecraft-fonts/raw/main/font/MinecraftTen.ttf?raw=true -O "$DEST_DIR"/MinecraftTen.ttf > /dev/null 2>&1 # MinecraftTen
+        wget -q https://github.com/Stradios/Minecraft-fonts/raw/main/font/MinecraftTenE.ttf?raw=true -O "$DEST_DIR"/MinecraftEvenings.ttf > /dev/null 2>&1 # MinecraftEvenings
 
     fi
 
@@ -124,7 +126,7 @@ continueWget() {
 
 function banner(){
     echo -e "$LYELLOW" ""
-    echo -e "MinecraftTen-VGORe Font "
+    echo -e "Minecraft Font "
 
 }
 
